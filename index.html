@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IndoorNav</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="ratchet/css/ratchet-theme-ios.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="ratchet/js/ratchet.js"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7PnFQbJ3cTlQt8bPnhJo-4AGpbVq-9sQ"></script>
+    <script src="scripts/main.js"></script>
+  </head>
+  <body>
+
+    <header>
+
+    </header>
+
+    <div class="content">
+        <div class="map" id="map"></div>
+
+        <input class="map__search" type="text" placeholder="Search">
+    </div>
+
+    <!-- Compose modal -->
+    <div id="composeModal" class="modal">
+      <header class="bar bar-nav">
+        <a class="btn btn-link pull-right" href="#composeModal">
+          <strong>Send</strong>
+        </a>
+        <a class="btn btn-link pull-left" href="#composeModal">
+          Cancel
+        </a>
+        <h1 class="title">New message</h1>
+      </header>
+
+      <div class="content">
+        <form class="input-group">
+          <input type="text" placeholder="To:">
+          <input type="email" placeholder="From:">
+
+          <textarea rows="20"></textarea>
+        </form>
+      </div>
+    </div><!-- /.modal -->
+  </body>
+</html>
