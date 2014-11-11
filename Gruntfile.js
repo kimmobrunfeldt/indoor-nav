@@ -6,7 +6,7 @@
  */
 
 /* jshint node: true */
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   'use strict';
 
   // Force use of Unix newlines
@@ -24,7 +24,6 @@ module.exports = function (grunt) {
 
     // Metadata.
     meta: {
-      srcPath:        'sass/',
       distPath:       'dist/',
       docsPath:       'docs/dist/',
       docsAssetsPath: 'docs/assets/'
@@ -64,7 +63,6 @@ module.exports = function (grunt) {
     sass: {
       options: {
         banner: '<%= banner %>',
-        sourcemap: 'none',
         style: 'expanded',
         unixNewlines: true
       },
@@ -84,14 +82,14 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= meta.distPath %>css/<%= pkg.name %>.css': '<%= meta.distPath %>css/<%= pkg.name %>.css',
-          '<%= meta.distPath %>css/<%= pkg.name %>-theme-android.css': '<%= meta.distPath %>css/<%= pkg.name %>-theme-android.css',
-          '<%= meta.distPath %>css/<%= pkg.name %>-theme-ios.css': '<%= meta.distPath %>css/<%= pkg.name %>-theme-ios.css'
+          '<%= meta.distPath %>/css/<%= pkg.name %>.css': '<%= meta.distPath %>/css/<%= pkg.name %>.css',
+          '<%= meta.distPath %>/css/<%= pkg.name %>-theme-android.css': '<%= meta.distPath %>/css/<%= pkg.name %>-theme-android.css',
+          '<%= meta.distPath %>/css/<%= pkg.name %>-theme-ios.css': '<%= meta.distPath %>/css/<%= pkg.name %>-theme-ios.css'
         }
       },
       docs: {
         files: {
-          '<%= meta.docsAssetsPath %>css/docs.css': '<%= meta.docsAssetsPath %>css/docs.css'
+          '<%= meta.docsAssetsPath %>/css/docs.css': '<%= meta.docsAssetsPath %>/css/docs.css'
         }
       }
     },
@@ -100,7 +98,7 @@ module.exports = function (grunt) {
       fonts: {
         expand: true,
         src: 'fonts/*',
-        dest: '<%= meta.distPath %>'
+        dest: '<%= meta.distPath %>/'
       },
       docs: {
         expand: true,
@@ -159,7 +157,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: [
-          '<%= meta.srcPath %>**/*.scss'
+          '<%= meta.srcPath %>/**/*.scss'
         ],
         tasks: ['sass']
       }
@@ -223,9 +221,10 @@ module.exports = function (grunt) {
         failHard: true,
         reset: true,
         relaxerror: [
-          'Attribute ontouchstart not allowed on element body at this point.',
+          'Bad value apple-mobile-web-app-title for attribute name on element meta: Keyword apple-mobile-web-app-title is not registered.',
+          'Bad value apple-mobile-web-app-status-bar-style for attribute name on element meta: Keyword apple-mobile-web-app-status-bar-style is not registered.',
           'Bad value X-UA-Compatible for attribute http-equiv on element meta.',
-          'Consider using the h1 element as a top-level heading only \\(all h1 elements are treated as top-level headings by many screen readers and other tools\\)\\.'
+          'Attribute ontouchstart not allowed on element body at this point.'
         ]
       },
       files: {
