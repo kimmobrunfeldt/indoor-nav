@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IndoorNav</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link rel="stylesheet" href="ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="ratchet/css/ratchet-theme-ios.css">
+    <!-- Include the compiled Ratchet JS -->
+    <script src="ratchet/js/ratchet.js"></script>
+
+    <!-- Custom JS and CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLnY_rDnVbpQPcG__ASvsU_gsUVZ1fO1g"></script>
+    <script src="scripts/lib/jquery-2.1.1.js"></script>
+    <script src="scripts/lib/jquery.panzoom.js"></script>
+    <script src="scripts/main.js"></script>
+  </head>
+  <body>
+    <header class="bar bar-nav">
+      <a href="index.html" class="btn btn-link btn-nav pull-left">
+        <span class="icon icon-left-nav"></span>
+        Back
+      </a>
+      <h1 class="title">Tietotalo</h1>
+    </header>
+
+    <div class="content indoor-map-view">
+      <div class="indoor-map" id="indoor-map">
+        <img src="images/tietotalo.svg" alt="Tietotalo" />
+      </div>
+
+      <input class="indoor-map__search" type="text" placeholder="Search">
+    </div>
+
+  </body>
+</html>
