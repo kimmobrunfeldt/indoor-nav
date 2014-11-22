@@ -18,11 +18,15 @@
     <script src="ratchet/js/ratchet.js"></script>
 
     <!-- Custom JS and CSS -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/main.css">
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLnY_rDnVbpQPcG__ASvsU_gsUVZ1fO1g"></script>
     <script src="scripts/lib/jquery-2.1.1.js"></script>
+    <script src="scripts/lib/jquery-ui.js"></script>
     <script src="scripts/lib/jquery.panzoom.js"></script>
+    <script src="scripts/lib/typeahead.js"></script>
+    <script src="scripts/lib/fastclick.js"></script>
     <script src="scripts/main.js"></script>
   </head>
   <body>
@@ -36,10 +40,13 @@
 
     <div class="content indoor-map-view">
       <div class="indoor-map" id="indoor-map">
-        <img src="images/tietotalo.svg" alt="Tietotalo" />
+        <img src="images/tietotalo.jpg" alt="Tietotalo" />
       </div>
 
-      <input class="indoor-map__search" type="text" placeholder="Search">
+      <div class="search">
+          <input id="search" class="indoor-map__search" type="text" placeholder="Search">
+      </div>
+
     </div>
 
   </body>

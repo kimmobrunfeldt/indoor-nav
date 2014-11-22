@@ -1,5 +1,30 @@
+var ROOMS = [
+    'TB109',
+    'TB110',
+    'TB217',
+    'TB216',
+    'TC106'
+];
+
 function initIndoorMapView() {
-    $('#indoor-map').panzoom();
+    var $elem = $('#indoor-map');
+
+    $elem.panzoom({
+        minScale: 0.1,
+        maxScale: 2,
+    });
+    $elem.panzoom("zoom", 0.2, { silent: true });
+    $elem.panzoom("pan", -750, -1560, { silent: true} );
+
+    var $search = $('#search');
+    $search.autocomplete({
+      source: ROOMS
+    });
+
+    $search.on('autocompleteselect', function(event, ui) {
+        var selected = ui.item.value;
+        console.log(selected, 'selected');
+    });
 }
 
 function initMapView() {
@@ -43,6 +68,8 @@ function getViewName() {
 }
 
 function initView(viewName) {
+    console.log('Init view', viewName);
+
     var views = {
         index: initMapView,
         indoorMap: initIndoorMapView
@@ -58,4 +85,4 @@ function onLoad() {
 }
 
 window.addEventListener('push', onLoad);
-google.maps.event.addDomListener(window, 'load', onLoad);
+$(onLoad);

@@ -18,9 +18,10 @@
 
 .indoor-map-view {
   position: relative;
+  background: white;
 }
 
-.indoor-map__search {
+.search {
   margin: 0 4%;
   width: 92% !important;
   position: absolute;
@@ -31,4 +32,16 @@
 .indoor-map {
   width: 100%;
   height: 100%;
+}
+
+.indoor-map > img {
+  height: 100%;
+}
+
+.ui-menu .ui-menu-item {
+  padding: 10px 1em 10px .4em;
+}
+
+.ui-menu {
+  background: white;
 }
