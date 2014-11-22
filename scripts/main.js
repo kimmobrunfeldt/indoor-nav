@@ -64,7 +64,7 @@ function getViewName() {
     if (last.length < 2) {
         view = 'index';
     } else {
-        view = last.substr(0, last.length - 6);
+        view = last.substr(0, last.length - 5);
     }
 
     return view;
