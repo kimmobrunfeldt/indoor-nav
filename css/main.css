@@ -50,6 +50,21 @@
   height: 3213px;
 }
 
+.route-info {
+  display: table;
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+  background: #eee;
+}
+
+.route-info > img {
+  display: table-cell;
+  vertical-align: middle;
+  float: left;
+  height: 80px;
+}
 
 .ui-menu .ui-menu-item {
   padding: 10px 1em 10px .4em;

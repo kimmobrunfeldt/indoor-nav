@@ -1,12 +1,15 @@
 var ROOMS = {
     'TB103': {
-        location: [3204, 1748]
+        location: [3204, 1748],
+        distance: 10
     },
     'TB109': {
-        location: [1824, 1792]
+        location: [1824, 1792],
+        distance: 50
     },
     'TC163': {
-        location: [1236, 1656]
+        location: [1236, 1656],
+        distance: 100
     }
 };
 
@@ -34,6 +37,11 @@ function showRoute(destination) {
 
     $marker.show();
     $route.show();
+}
+
+function setRoutePosition(destination, percent) {
+    var distanceLeft = destination.distance - destination.distance * percent;
+    $('#distance-left').html(distanceLeft + ' meters');
 }
 
 function setLocation(location) {
