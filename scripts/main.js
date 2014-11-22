@@ -1,12 +1,12 @@
 var ROOMS = {
     'TB103': {
-        location: [3224, 1776]
+        location: [3204, 1748]
     },
     'TB109': {
-        location: [1832, 1816]
+        location: [1824, 1792]
     },
     'TC163': {
-        location: [1236, 1660]
+        location: [1236, 1656]
     }
 };
 
@@ -27,11 +27,13 @@ function showRoute(destination) {
 
     $marker.css({
         left: ROOMS[destination].location[0] - MARKER_SIZE[0] / 2,
-        top: ROOMS[destination].location[1] - MARKER_SIZE[0] / 2
-    })
+        top: ROOMS[destination].location[1] - MARKER_SIZE[0]
+    });
+
+    $route.attr('src', 'images/route-' + destination + '.svg');
+
     $marker.show();
     $route.show();
-
 }
 
 function setLocation(location) {
@@ -45,12 +47,14 @@ function setLocation(location) {
 
 function hideRoute() {
     $indoorMap = $('#indoor-map');
-    $indoorMap.find('#marker').hide();
 
+    $indoorMap.find('#marker').hide();
+    $indoorMap.find('#route').hide();
 }
 
 function initIndoorMapView() {
     var $elem = $('#indoor-map');
+    hideRoute();
 
     $elem.panzoom({
         minScale: 0.1,

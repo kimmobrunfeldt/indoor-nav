@@ -45,6 +45,12 @@
   position: absolute;
 }
 
+.indoor-map > #route {
+  width: 4183px;
+  height: 3213px;
+}
+
+
 .ui-menu .ui-menu-item {
   padding: 10px 1em 10px .4em;
 }
