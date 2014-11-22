@@ -1,10 +1,53 @@
-var ROOMS = [
-    'TB109',
-    'TB110',
-    'TB217',
-    'TB216',
-    'TC106'
-];
+var ROOMS = {
+    'TB103': {
+        location: [3224, 1776]
+    },
+    'TB109': {
+        location: [1832, 1816]
+    },
+    'TC163': {
+        location: [1236, 1660]
+    }
+};
+
+var ROOMS_KEYS = [];
+for (var room in ROOMS) {
+    if (ROOMS.hasOwnProperty(room)) ROOMS_KEYS.push(room);
+}
+
+// In pixels in tietotalo.jpg
+var START_LOCATION = [3576, 1704];
+var LOCATION_SIZE = [100, 100];
+var MARKER_SIZE = [200, 200];
+
+function showRoute(destination) {
+    $indoorMap = $('#indoor-map');
+    $marker = $indoorMap.find('#marker');
+    $route = $indoorMap.find('#route');
+
+    $marker.css({
+        left: ROOMS[destination].location[0] - MARKER_SIZE[0] / 2,
+        top: ROOMS[destination].location[1] - MARKER_SIZE[0] / 2
+    })
+    $marker.show();
+    $route.show();
+
+}
+
+function setLocation(location) {
+    $location = $('#location');
+
+    $location.css({
+        left: location[0] - LOCATION_SIZE[0] / 2,
+        top: location[1] - LOCATION_SIZE[0] / 2
+    });
+}
+
+function hideRoute() {
+    $indoorMap = $('#indoor-map');
+    $indoorMap.find('#marker').hide();
+
+}
 
 function initIndoorMapView() {
     var $elem = $('#indoor-map');
@@ -14,17 +57,20 @@ function initIndoorMapView() {
         maxScale: 2,
     });
     $elem.panzoom("zoom", 0.2, { silent: true });
-    $elem.panzoom("pan", -750, -1560, { silent: true} );
+    $elem.panzoom("pan", -691, -208, { silent: true} );
 
     var $search = $('#search');
     $search.autocomplete({
-      source: ROOMS
+        source: ROOMS_KEYS
     });
 
     $search.on('autocompleteselect', function(event, ui) {
         var selected = ui.item.value;
         console.log(selected, 'selected');
+        showRoute(selected);
     });
+
+    setLocation(START_LOCATION);
 }
 
 function initMapView() {

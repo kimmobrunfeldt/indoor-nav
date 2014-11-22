@@ -17,7 +17,6 @@
 }
 
 .indoor-map-view {
-  position: relative;
   background: white;
 }
 
@@ -32,10 +31,18 @@
 .indoor-map {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.indoor-map > .map {
+  top: 0;
+  left: 0;
+  width: 4183px;
+  height: 3213px;
 }
 
 .indoor-map > img {
-  height: 100%;
+  position: absolute;
 }
 
 .ui-menu .ui-menu-item {
