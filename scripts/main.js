@@ -56,12 +56,15 @@ function initMapView() {
 function getViewName() {
     // /index.html -> index
     var pathname = window.location.pathname;
+    var parts = pathname.split('/');
+    var last = parts[parts.length - 1];
+
     var view;
 
-    if (pathname.length < 2) {
+    if (last.length < 2) {
         view = 'index';
     } else {
-        view = pathname.substr(1, pathname.length - 6);
+        view = last.substr(1, last.length - 6);
     }
 
     return view;
