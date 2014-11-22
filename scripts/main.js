@@ -1,15 +1,26 @@
+var peer = new Peer('indoor-proto', {key: '63fmbimtok9y66r', debug: 3});
+peer.on('connection', function(conn) {
+    conn.on('data', onData);
+});
+
 var ROOMS = {
     'TB103': {
         location: [3204, 1748],
-        distance: 10
+        distance: 10,
+        zoom: 0.2,
+        pan: [-655, -276]
     },
     'TB109': {
         location: [1824, 1792],
-        distance: 50
+        distance: 50,
+        zoom: 0.15,
+        pan: [-371, -231]
     },
     'TC163': {
         location: [1236, 1656],
-        distance: 100
+        distance: 100,
+        zoom: 0.12,
+        pan: [-264, -190]
     }
 };
 
@@ -20,28 +31,50 @@ for (var room in ROOMS) {
 
 // In pixels in tietotalo.jpg
 var START_LOCATION = [3576, 1704];
-var LOCATION_SIZE = [100, 100];
+var LOCATION_SIZE = [70, 70];
 var MARKER_SIZE = [200, 200];
 
+var currentDestination;
+
+function onData(data) {
+    console.log(data)
+    setRoutePosition(data.percent);
+}
+
 function showRoute(destination) {
+    currentDestination = destination;
+
     $indoorMap = $('#indoor-map');
     $marker = $indoorMap.find('#marker');
     $route = $indoorMap.find('#route');
+    $routeInfo = $('#route-info');
+
+    var room = ROOMS[destination];
 
     $marker.css({
-        left: ROOMS[destination].location[0] - MARKER_SIZE[0] / 2,
-        top: ROOMS[destination].location[1] - MARKER_SIZE[0]
+        left: room.location[0] - MARKER_SIZE[0] / 2,
+        top: room.location[1] - MARKER_SIZE[0]
     });
 
+    $indoorMap.panzoom("zoom", room.zoom, { silent: true });
+    $indoorMap.panzoom("pan", room.pan[0], room.pan[1], { silent: true });
+
     $route.attr('src', 'images/route-' + destination + '.svg');
+    setRoutePosition(destination, 0);
+    $('#destination').html(destination);
 
     $marker.show();
     $route.show();
+    $routeInfo.show();
 }
 
-function setRoutePosition(destination, percent) {
-    var distanceLeft = destination.distance - destination.distance * percent;
-    $('#distance-left').html(distanceLeft + ' meters');
+function setRoutePosition(percent) {
+    var distance = ROOMS[currentDestination].distance;
+    var distanceLeft = distance - distance * percent;
+    var timeLeft = distanceLeft / 4;
+
+    $('#distance-left').html(distanceLeft.toFixed());
+    $('#time-left').html(timeLeft.toFixed());
 }
 
 function setLocation(location) {
@@ -58,6 +91,7 @@ function hideRoute() {
 
     $indoorMap.find('#marker').hide();
     $indoorMap.find('#route').hide();
+    $('#route-info').hide();
 }
 
 function initIndoorMapView() {
@@ -77,12 +111,25 @@ function initIndoorMapView() {
     });
 
     $search.on('autocompleteselect', function(event, ui) {
+    });
+
+    $search.on('focus', function() {
+        $search.autocomplete('search', 'T');
+        console.log('focus')
+    });
+
+    $search.on('autocompletefocus', function(event, ui) {
         var selected = ui.item.value;
         console.log(selected, 'selected');
         showRoute(selected);
+        hideKeyboard();
     });
 
     setLocation(START_LOCATION);
+
+    setTimeout(function() {
+        $('.hidden').removeClass('hidden');
+    }, 100)
 }
 
 function initMapView() {
@@ -128,6 +175,11 @@ function getViewName() {
     return view;
 }
 
+function hideKeyboard() {
+    document.activeElement.blur();
+    $("input").blur();
+};
+
 function initView(viewName) {
     console.log('Init view', viewName);
 
@@ -143,6 +195,8 @@ function initView(viewName) {
 function onLoad() {
     var viewName = getViewName();
     initView(viewName);
+
+
 }
 
 window.addEventListener('push', onLoad);

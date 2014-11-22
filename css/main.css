@@ -53,17 +53,38 @@
 .route-info {
   display: table;
   position: absolute;
-  height: 100px;
+  height: 60px;
   width: 100%;
   bottom: 0;
-  background: #eee;
+  background: #f8f8f8;
 }
 
 .route-info > img {
   display: table-cell;
   vertical-align: middle;
-  float: left;
-  height: 80px;
+  float: right;
+  height: 100%;
+}
+
+.route-info > .info-text {
+  padding: 10px 7px;
+  float: right;
+}
+
+.route-info #destination {
+  font-size: 1.6em;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  height: 100%;
+  margin: 0;
+  width: 130px;
+}
+
+.route-info p {
+  font-size: 1.1em;
+  color: black;
+  margin: 3px 0;
 }
 
 .ui-menu .ui-menu-item {
@@ -72,4 +93,9 @@
 
 .ui-menu {
   background: white;
+}
+
+
+.hidden {
+  visibility: hidden;
 }

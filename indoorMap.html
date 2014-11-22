@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/main.css">
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLnY_rDnVbpQPcG__ASvsU_gsUVZ1fO1g"></script>
+    <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
     <script src="scripts/lib/jquery-2.1.1.js"></script>
     <script src="scripts/lib/jquery-ui.js"></script>
     <script src="scripts/lib/jquery.panzoom.js"></script>
@@ -38,11 +39,11 @@
       <h1 class="title">Tietotalo</h1>
     </header>
 
-    <div class="content indoor-map-view">
+    <div class="content indoor-map-view hidden">
       <div class="indoor-map" id="indoor-map">
         <img id="map" src="images/tietotalo.jpg" alt="Tietotalo" />
 
-        <img width="100" height="100" id="location" src="images/location.svg" />
+        <img width="70" height="70" id="location" src="images/location.svg" />
 
         <img width="200" height="200" id="marker" src="images/place-marker.svg" />
         <img width="4183" height="3213" id="route" src="images/route-TB103.svg" />
@@ -53,12 +54,15 @@
       </div>
 
 
-      <div class="route-info">
+      <div class="route-info" id="route-info">
+        <p id="destination"></p>
+
         <img src="images/clock.svg" alt="Clock" />
         <div class="info-text">
-          <p id="time-left">1 min</p>
-          <p id="distance-left">50 meters</p>
+          <p><span id="distance-left">50</span> meters</p>
+          <p><span id="time-left">1</span> seconds</p>
         </div>
+
       </div>
 
     </div>

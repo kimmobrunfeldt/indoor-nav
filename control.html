@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>IndoorNav</title>
+  <title>Control</title>
 
   <!-- Sets initial viewport load and disables zooming  -->
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -25,16 +25,37 @@
   <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
   <script src="scripts/lib/jquery-2.1.1.js"></script>
   <script src="scripts/lib/jquery-ui.js"></script>
-  <script src="scripts/lib/jquery.panzoom.js"></script>
-  <script src="scripts/lib/typeahead.js"></script>
-  <script src="scripts/lib/fastclick.js"></script>
-  <script src="scripts/main.js"></script>
+  <style>
+  body {
+      padding: 50px;
+  }
+  </style>
+  <script>
+
+
+$(function() {
+
+    var peer = new Peer('indoor-proto-control', {key: '63fmbimtok9y66r', debug: 3});
+
+    var conn = peer.connect('indoor-proto');
+    conn.on('open', function(){
+
+    });
+
+    $( "#slider" ).slider();
+
+    $( "#slider" ).on( "slidechange", function( event, ui ) {
+        conn.send({
+            percent: ui.value / 100
+        });
+    } );
+});
+
+  </script>
 </head>
 <body>
 
-  <div class="content">
-    <div class="map" id="map"></div>
-  </div>
+<div id="slider"></div>
 
 </body>
 </html>
