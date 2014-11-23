@@ -1,26 +1,31 @@
-var peer = new Peer('indoor-proto', {key: '63fmbimtok9y66r', debug: 3});
-peer.on('connection', function(conn) {
-    conn.on('data', onData);
+var percentRef = new Firebase('https://indoor-proto.firebaseio.com/percent');
+
+percentRef.on('value', function(snapshot) {
+    onData(snapshot.val());
 });
+
 
 var ROOMS = {
     'TB103': {
         location: [3204, 1748],
         distance: 10,
         zoom: 0.2,
-        pan: [-655, -276]
+        pan: [-655, -276],
+        route: 'M3576,1704 L3372,1708 L3196,1748'
     },
     'TB109': {
         location: [1824, 1792],
         distance: 50,
         zoom: 0.15,
-        pan: [-371, -231]
+        pan: [-371, -231],
+        route: 'M3576,1704 L3372,1708 L1932,1732 L1824,1792'
     },
     'TC163': {
         location: [1236, 1656],
         distance: 100,
         zoom: 0.12,
-        pan: [-264, -190]
+        pan: [-264, -190],
+        route: 'M3576,1704 L3372,1708 L1312,1732 L1236,1656'
     }
 };
 
@@ -37,8 +42,7 @@ var MARKER_SIZE = [200, 200];
 var currentDestination;
 
 function onData(data) {
-    console.log(data)
-    setRoutePosition(data.percent);
+    setRoutePosition(data.value);
 }
 
 function showRoute(destination) {
@@ -59,23 +63,56 @@ function showRoute(destination) {
     $indoorMap.panzoom("zoom", room.zoom, { silent: true });
     $indoorMap.panzoom("pan", room.pan[0], room.pan[1], { silent: true });
 
-    $route.attr('src', 'images/route-' + destination + '.svg');
-    setRoutePosition(destination, 0);
+    var svg = createRouteSvg(destination);
+    $route.html('');
+    $route[0].appendChild(svg);
+
+    setRoutePosition(0);
     $('#destination').html(destination);
+
 
     $marker.show();
     $route.show();
     $routeInfo.show();
 }
 
+function createRouteSvg(destination) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 4183 3213");
+
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", ROOMS[destination].route);
+    path.setAttribute("stroke", '#47ACFF');
+    path.setAttribute("stroke-width", 30);
+    path.setAttribute("fill-opacity", 0);
+    svg.appendChild(path);
+
+    path.id = 'route-path'
+
+    return svg;
+}
+
 function setRoutePosition(percent) {
+    if (!currentDestination) return;
+
     var distance = ROOMS[currentDestination].distance;
     var distanceLeft = distance - distance * percent;
     var timeLeft = distanceLeft / 4;
 
     $('#distance-left').html(distanceLeft.toFixed());
     $('#time-left').html(timeLeft.toFixed());
+
+    var path = $('#route-path')[0];
+    var length = path.getTotalLength();
+    var pathDistance = percent * length;
+    var point = path.getPointAtLength(pathDistance);
+
+    $('#location').css({
+        left: point.x - LOCATION_SIZE[0] / 2,
+        top: point.y - LOCATION_SIZE[0] / 2
+    });
 }
+
 
 function setLocation(location) {
     $location = $('#location');

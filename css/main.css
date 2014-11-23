@@ -46,8 +46,14 @@
 }
 
 .indoor-map > #route {
+  position: absolute;
   width: 4183px;
   height: 3213px;
+}
+
+.indoor-map > #route > svg {
+  width: 100%;
+  height: 100%;
 }
 
 .route-info {

@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="css/main.css">
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLnY_rDnVbpQPcG__ASvsU_gsUVZ1fO1g"></script>
-  <script src="http://cdn.peerjs.com/0.3/peer.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
   <script src="scripts/lib/jquery-2.1.1.js"></script>
   <script src="scripts/lib/jquery-ui.js"></script>
   <style>
@@ -35,20 +35,21 @@
 
 $(function() {
 
-    var peer = new Peer('indoor-proto-control', {key: '63fmbimtok9y66r', debug: 3});
+    var percent = new Firebase('https://indoor-proto.firebaseio.com/percent');
 
-    var conn = peer.connect('indoor-proto');
-    conn.on('open', function(){
+    $("#slider").slider();
 
+    $("#slider").on("slidechange", function(event, ui) {
+        percent.update({
+            value: ui.value / 100
+        });
     });
 
-    $( "#slider" ).slider();
-
-    $( "#slider" ).on( "slidechange", function( event, ui ) {
-        conn.send({
-            percent: ui.value / 100
+    $("#slider").on("slide", function(event, ui) {
+        percent.update({
+            value: ui.value / 100
         });
-    } );
+    });
 });
 
   </script>
