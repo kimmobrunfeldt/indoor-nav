@@ -19,7 +19,7 @@ var ROOMS = {
         zoom: 0.2,
         pan: [-655, -276],
         route: 'M3576,1704 L3372,1708 L3196,1748'
-    },    
+    },
     'TC163': {
         location: [1236, 1656],
         distance: 100,
@@ -160,7 +160,7 @@ function initIndexView() {
         showRoute(room);
 
         roomIndex++;
-        if (roomIndex > ROOMS_KEYS.length) {
+        if (roomIndex > ROOMS_KEYS.length - 1) {
             roomIndex = 0;
         }
     });
