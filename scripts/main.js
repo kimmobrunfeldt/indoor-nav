@@ -6,13 +6,6 @@ percentRef.on('value', function(snapshot) {
 
 
 var ROOMS = {
-    'TB103': {
-        location: [3204, 1748],
-        distance: 10,
-        zoom: 0.2,
-        pan: [-655, -276],
-        route: 'M3576,1704 L3372,1708 L3196,1748'
-    },
     'TB109': {
         location: [1824, 1792],
         distance: 50,
@@ -20,6 +13,13 @@ var ROOMS = {
         pan: [-371, -231],
         route: 'M3576,1704 L3372,1708 L1932,1732 L1824,1792'
     },
+    'TB103': {
+        location: [3204, 1748],
+        distance: 10,
+        zoom: 0.2,
+        pan: [-655, -276],
+        route: 'M3576,1704 L3372,1708 L3196,1748'
+    },    
     'TC163': {
         location: [1236, 1656],
         distance: 100,
@@ -33,6 +33,8 @@ var ROOMS_KEYS = [];
 for (var room in ROOMS) {
     if (ROOMS.hasOwnProperty(room)) ROOMS_KEYS.push(room);
 }
+
+var roomIndex = 0;
 
 // In pixels in tietotalo.jpg
 var START_LOCATION = [3576, 1704];
@@ -154,8 +156,13 @@ function initIndexView() {
     var $search = $('#search');
 
     $search.on('click', function() {
-        var room = ROOMS_KEYS[Math.floor(Math.random() * ROOMS_KEYS.length)];
+        var room = ROOMS_KEYS[roomIndex];
         showRoute(room);
+
+        roomIndex++;
+        if (roomIndex > ROOMS_KEYS.length) {
+            roomIndex = 0;
+        }
     });
 
     setLocation(START_LOCATION);
