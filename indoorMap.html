@@ -15,7 +15,7 @@
 
     <!-- Include the compiled Ratchet CSS -->
     <link rel="stylesheet" href="ratchet/css/ratchet.css">
-    <link rel="stylesheet" href="ratchet/css/ratchet-theme-android.css">
+    <link rel="stylesheet" href="ratchet/css/ratchet-theme-ios.css">
     <!-- Include the compiled Ratchet JS -->
     <script src="ratchet/js/ratchet.js"></script>
 
@@ -33,13 +33,14 @@
     <script src="scripts/main.js"></script>
   </head>
   <body>
+
+
     <header class="bar bar-nav">
-      <a href="index.html" class="btn btn-link btn-nav pull-left">
-        <span class="icon icon-left-nav"></span>
-        Back
-      </a>
+
       <h1 class="title">Tietotalo</h1>
     </header>
+
+
 
     <div class="content indoor-map-view hidden">
       <div class="indoor-map" id="indoor-map">
@@ -52,7 +53,10 @@
       </div>
 
       <div class="search">
-          <input id="search" class="indoor-map__search" type="text" placeholder="Search">
+        <!-- Block button in standard bar fixed below top bar -->
+        <div class="search-bar bar bar-standard bar-header-secondary">
+          <button id="search" class="search btn btn-block">Find empty room</button>
+        </div>
       </div>
 
 
@@ -68,6 +72,16 @@
       </div>
 
     </div>
+    <div id="splash">
+      <img src="images/map.png"/>
 
+    </div>
+    <div id="locating">
+
+      <img src="images/loader.gif" alt="" />
+      <p>
+        Locating..
+      </p>
+    </div>
   </body>
 </html>

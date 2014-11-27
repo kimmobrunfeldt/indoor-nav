@@ -132,6 +132,14 @@ function hideRoute() {
 }
 
 function initIndoorMapView() {
+    setTimeout(function() {
+        $('#splash').addClass('zoom');
+        setTimeout(function() {
+            $('#splash').hide();
+            $('#locating').fadeOut();
+        }, 1800);
+    }, 3000)
+
     var $elem = $('#indoor-map');
     hideRoute();
 
@@ -143,23 +151,10 @@ function initIndoorMapView() {
     $elem.panzoom("pan", -691, -208, { silent: true} );
 
     var $search = $('#search');
-    $search.autocomplete({
-        source: ROOMS_KEYS
-    });
 
-    $search.on('autocompleteselect', function(event, ui) {
-    });
-
-    $search.on('focus', function() {
-        $search.autocomplete('search', 'T');
-        console.log('focus')
-    });
-
-    $search.on('autocompletefocus', function(event, ui) {
-        var selected = ui.item.value;
-        console.log(selected, 'selected');
-        showRoute(selected);
-        hideKeyboard();
+    $search.on('click', function() {
+        var room = ROOMS_KEYS[Math.floor(Math.random() * ROOMS_KEYS.length)];
+        showRoute(room);
     });
 
     setLocation(START_LOCATION);
@@ -172,7 +167,7 @@ function initIndoorMapView() {
 function initMapView() {
     var mapOptions = {
         center: { lat: 61.4487104, lng: 23.8564481},
-        zoom: 14,
+        zoom: 11,
         zoomControl: false,
         mapTypeControl: false,
         scaleControl: false,
