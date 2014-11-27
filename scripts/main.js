@@ -134,6 +134,7 @@ function hideRoute() {
 function initIndexView() {
     setTimeout(function() {
         $('#splash').addClass('zoom');
+        $('.hidden').removeClass('hidden');
         setTimeout(function() {
             $('#splash').hide();
             $('#locating').fadeOut();
@@ -158,10 +159,6 @@ function initIndexView() {
     });
 
     setLocation(START_LOCATION);
-
-    setTimeout(function() {
-        $('.hidden').removeClass('hidden');
-    }, 100)
 }
 
 
@@ -205,5 +202,4 @@ function onLoad() {
 
 }
 
-window.addEventListener('push', onLoad);
-$(onLoad);
+$(window).load(onLoad);
