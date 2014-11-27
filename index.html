@@ -1,42 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>IndoorNav</title>
+  <head>
+    <meta charset="utf-8">
+    <title>IndoorNav</title>
 
-  <!-- Sets initial viewport load and disables zooming  -->
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
 
-  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
 
-  <!-- Include the compiled Ratchet CSS -->
-  <link rel="stylesheet" href="ratchet/css/ratchet.css">
-  <link rel="stylesheet" href="ratchet/css/ratchet-theme-ios.css">
-  <!-- Include the compiled Ratchet JS -->
-  <script src="ratchet/js/ratchet.js"></script>
+    <!-- Include the compiled Ratchet CSS -->
+    <link rel="stylesheet" href="ratchet/css/ratchet.css">
+    <link rel="stylesheet" href="ratchet/css/ratchet-theme-ios.css">
+    <!-- Include the compiled Ratchet JS -->
+    <script src="ratchet/js/ratchet.js"></script>
 
-  <!-- Custom JS and CSS -->
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/main.css">
+    <!-- Custom JS and CSS -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/main.css">
 
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLnY_rDnVbpQPcG__ASvsU_gsUVZ1fO1g"></script>
-  <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-  <script src="scripts/lib/jquery-2.1.1.js"></script>
-  <script src="scripts/lib/jquery-ui.js"></script>
-  <script src="scripts/lib/jquery.panzoom.js"></script>
-  <script src="scripts/lib/typeahead.js"></script>
-  <script src="scripts/lib/fastclick.js"></script>
-  <script src="scripts/main.js"></script>
-</head>
-<body>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLnY_rDnVbpQPcG__ASvsU_gsUVZ1fO1g"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+    <script src="scripts/lib/jquery-2.1.1.js"></script>
+    <script src="scripts/lib/jquery-ui.js"></script>
+    <script src="scripts/lib/jquery.panzoom.js"></script>
+    <script src="scripts/lib/typeahead.js"></script>
+    <script src="scripts/lib/fastclick.js"></script>
+    <script src="scripts/main.js"></script>
+  </head>
+  <body>
 
-  <div class="content">
-    <div class="map" id="map"></div>
-  </div>
 
-</body>
+    <header class="bar bar-nav">
+
+      <h1 class="title">Tietotalo</h1>
+    </header>
+
+
+
+    <div class="content indoor-map-view hidden">
+      <div class="indoor-map" id="indoor-map">
+        <img id="map" src="images/tietotalo.jpg" alt="Tietotalo" />
+
+        <img width="70" height="70" id="location" src="images/location.svg" />
+
+        <img width="200" height="200" id="marker" src="images/place-marker.svg" />
+        <div width="4183" height="3213" id="route"></div>
+      </div>
+
+      <div class="search">
+        <!-- Block button in standard bar fixed below top bar -->
+        <div class="search-bar bar bar-standard bar-header-secondary">
+          <button id="search" class="search btn btn-block">Find empty room</button>
+        </div>
+      </div>
+
+
+      <div class="route-info" id="route-info">
+        <p id="destination"></p>
+
+        <img src="images/clock.svg" alt="Clock" />
+        <div class="info-text">
+          <p><span id="distance-left">50</span> meters</p>
+          <p><span id="time-left">1</span> seconds</p>
+        </div>
+
+      </div>
+
+    </div>
+    <div id="splash">
+      <img src="images/map.png"/>
+
+    </div>
+    <div id="locating">
+
+      <img src="images/loader.gif" alt="" />
+      <p>
+        Locating..
+      </p>
+    </div>
+  </body>
 </html>
