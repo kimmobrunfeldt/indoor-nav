@@ -131,7 +131,7 @@ function hideRoute() {
     $('#route-info').hide();
 }
 
-function initIndoorMapView() {
+function initIndexView() {
     setTimeout(function() {
         $('#splash').addClass('zoom');
         setTimeout(function() {
@@ -164,31 +164,6 @@ function initIndoorMapView() {
     }, 100)
 }
 
-function initMapView() {
-    var mapOptions = {
-        center: { lat: 61.4487104, lng: 23.8564481},
-        zoom: 11,
-        zoomControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false
-    };
-    var map = new google.maps.Map(document.querySelector('#map'), mapOptions);
-
-    var marker = new google.maps.Marker({
-        position: {
-            lat: 61.449846,
-            lng: 23.855787
-        },
-        map: map,
-        title:"Tietotalo",
-        icon: "images/building.png"
-    });
-
-    google.maps.event.addDomListener(marker, 'click', function() {
-        PUSH({url: "indoorMap.html", transition: "slide-in" });
-    });
-}
 
 function getViewName() {
     // /index.html -> index
@@ -216,8 +191,7 @@ function initView(viewName) {
     console.log('Init view', viewName);
 
     var views = {
-        index: initMapView,
-        indoorMap: initIndoorMapView
+        index: initIndexView
     };
 
     initFunc = views[viewName];
